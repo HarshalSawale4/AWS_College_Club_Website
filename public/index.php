@@ -28,6 +28,85 @@ $contact = $pdo->query("SELECT * FROM contact LIMIT 1")->fetch();
       padding: 0;
       box-sizing: border-box;
     }
+  /* ===== Netflix‑style intro ===== */
+.netflix-intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.netflix-intro.fade-out {
+    opacity: 0;
+}
+
+.intro-logo {
+    text-align: center;
+    transform: scale(2.5);
+    animation: netflixThud 0.9s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+.logo-text span {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.logo-text span:first-child {
+    font-size: 3rem;
+    background: linear-gradient(135deg, #ff9900, #ffb347);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.2;
+}
+
+.logo-text span:last-child {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #ff9900, #ffb347);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.logo-text small {
+    display: block;
+    color: #ff9900;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+@keyframes netflixThud {
+    0% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+    30% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    70% {
+        transform: scale(0.98);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
 
     :root {
       --bg-deep: #0a0c12;
@@ -588,7 +667,15 @@ $contact = $pdo->query("SELECT * FROM contact LIMIT 1")->fetch();
   </style>
 </head>
 <body>
-
+<div class="netflix-intro" id="netflixIntro">
+    <div class="intro-logo">
+        <div class="logo-text">
+            <span>AWS</span>
+            <span>Cloud Club</span>
+            <small>TCOER</small>
+        </div>
+    </div>
+</div>
 <div class="gradient-bg"></div>
 <div class="moving-orb orb1"></div>
 <div class="moving-orb orb2"></div>
@@ -847,6 +934,19 @@ $contact = $pdo->query("SELECT * FROM contact LIMIT 1")->fetch();
 <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
+// Netflix‑style intro: remove after animation + slight delay
+window.addEventListener('load', function() {
+    const intro = document.getElementById('netflixIntro');
+    if (!intro) return;
+    // Wait for the animation to finish (900ms) + 200ms extra for smoothness
+    setTimeout(function() {
+        intro.classList.add('fade-out');
+        // Remove the element from DOM after transition
+        setTimeout(function() {
+            intro.style.display = 'none';
+        }, 600);
+    }, 1100);
+});
   window.addEventListener('scroll', () => {
     const navbar = document.getElementById('navbar');
     if (window.scrollY > 50) navbar.classList.add('scrolled');
