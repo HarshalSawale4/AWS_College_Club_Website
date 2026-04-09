@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>AWS Cloud Club TCOER | Events</title>
+  <meta name="description" content="Explore all events by AWS Cloud Club TCOER – workshops, hackathons, community days, and more with detailed roles and schedules." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-deep: #0a0c12;
+      --bg-surface: #0f1117;
+      --primary: #ff9900;
+      --primary-dark: #ec7211;
+      --accent: #232f3e;
+      --text-primary: #f0f4fa;
+      --text-secondary: #9aa4bf;
+      --text-muted: #6c7a91;
+      --radius-md: 1.25rem;
+      --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-surface);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 10px;
+    }
+
+    .gradient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: radial-gradient(circle at 20% 30%, rgba(255, 153, 0, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 70%, rgba(35, 47, 62, 0.1) 0%, transparent 50%),
+                  linear-gradient(135deg, #0a0c12 0%, #11161f 100%);
+    }
+
+    .moving-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.4;
+      z-index: -1;
+      animation: floatOrb 18s infinite alternate ease-in-out;
+    }
+    .orb1 {
+      width: 60vw;
+      height: 60vw;
+      background: radial-gradient(circle, rgba(255, 153, 0, 0.2), transparent);
+      top: -20vh;
+      left: -30vw;
+      animation-duration: 25s;
+    }
+    .orb2 {
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(35, 47, 62, 0.25), transparent);
+      bottom: -20vh;
+      right: -20vw;
+      animation-duration: 20s;
+      animation-delay: -5s;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(5%, 8%) scale(1.1); }
+    }
+
+    .glass-card {
+      background: rgba(18, 22, 32, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 153, 0, 0.15);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-smooth);
+    }
+    .glass-card:hover {
+      border-color: rgba(255, 153, 0, 0.4);
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,153,0,0.2);
+      transform: translateY(-4px);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ff9900 0%, #ffb347 80%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(105deg, #ff9900, #ec7211);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      color: #0a0c12;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-primary:hover {
+      transform: scale(0.97);
+      background: linear-gradient(105deg, #ffaa33, #f47b20);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid rgba(255, 153, 0, 0.5);
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      color: #ff9900;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn-outline:hover {
+      background: rgba(255, 153, 0, 0.1);
+      border-color: #ff9900;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+      background: rgba(255, 153, 0, 0.1);
+      border: 1px solid rgba(255, 153, 0, 0.25);
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: all 0.4s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(10, 12, 18, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 153, 0, 0.2);
+      padding: 0.6rem 0;
+    }
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+    .logo svg {
+      width: 36px;
+      height: 36px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      max-width: 300px;
+      height: 100%;
+      background: rgba(10,12,18,0.95);
+      backdrop-filter: blur(20px);
+      z-index: 200;
+      padding: 5rem 2rem;
+      transition: right 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      border-left: 1px solid rgba(255, 153, 0, 0.2);
+    }
+    .mobile-menu.active {
+      right: 0;
+    }
+    .mobile-menu a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+    .close-menu {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .page-hero {
+      padding-top: 8rem;
+      padding-bottom: 3rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .events-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin: 3rem 0 5rem;
+    }
+    .event-item {
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .event-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(255, 153, 0, 0.2);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .event-title h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .event-date {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .event-body {
+      padding: 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+    }
+    .event-description p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+    .event-roles h4 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    .role-item {
+      margin-bottom: 0.75rem;
+      border-left: 2px solid var(--primary);
+      padding-left: 0.75rem;
+    }
+    .role-title {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .role-name {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .event-footer {
+      padding: 1rem 2rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      border-top: 1px solid rgba(255, 153, 0, 0.1);
+    }
+    .badge {
+      background: rgba(255, 153, 0, 0.15);
+      border-radius: 2rem;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.7rem;
+      color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .event-body {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .event-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+
+    .footer {
+      border-top: 1px solid rgba(255, 153, 0, 0.15);
+      padding: 3rem 0;
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border-radius: 1rem;
+      background: rgba(255,255,255,0.05);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+    .social-links a:hover {
+      background: var(--primary);
+      color: #0a0c12;
+    }
+    .cursor-glow {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 153, 0, 0.08) 0%, transparent 70%);
+      position: fixed;
+      pointer-events: none;
+      border-radius: 50%;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s linear;
+      opacity: 0;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: #0a0c12;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: all 0.3s;
+      z-index: 99;
+      border: none;
+      font-size: 1.2rem;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="gradient-bg"></div>
+<div class="moving-orb orb1"></div>
+<div class="moving-orb orb2"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="logo">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="18" r="16" stroke="#ff9900" stroke-width="2" fill="rgba(255,153,0,0.1)"/>
+        <path d="M10 22c2-6 4-10 8-10s6 4 8 10" stroke="#ffb347" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="18" cy="14" r="3" fill="#ff9900"/>
+      </svg>
+      AWS Cloud Club <span style="color:#ff9900;">TCOER</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="events.html" style="color:#ff9900;">Events</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <button class="hamburger" id="menuToggle">☰</button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" id="closeMenu">✕</button>
+  <a href="index.html">Home</a>
+  <a href="events.html">Events</a>
+  <a href="index.html#about">About</a>
+  <a href="index.html#contact">Contact</a>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="section-tag">Our Calendar</span>
+    <h1 style="font-size: clamp(2rem, 6vw, 3.5rem); margin-bottom: 1rem;">Upcoming & Past <span class="gradient-text">Events</span></h1>
+    <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Workshops, hackathons, community days – all with clear roles and responsibilities.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="events-list">
+    <!-- Event 1 - Upcoming -->
+    <div class="glass-card event-item">
+      <div class="event-header">
+        <div class="event-title">
+          <h3>AWS Student Community Day Pune 2025</h3>
+          <span class="badge">✨ Upcoming</span>
+        </div>
+        <div class="event-date">📅 24 January 2025 | 10:00 AM – 5:00 PM</div>
+      </div>
+      <div class="event-body">
+        <div class="event-description">
+          <p>A flagship gathering of AWS student builders across Pune. Includes keynote sessions, technical workshops on Lambda & API Gateway, career panel, and networking lunch.</p>
+          <p>📍 Venue: Trinity College Auditorium, Pune</p>
+        </div>
+        <div class="event-roles">
+          <h4>🎭 Event Roles</h4>
+          <div class="role-item"><div class="role-title">Organizer</div><div class="role-name">Aditya Kulkarni (President)</div></div>
+          <div class="role-item"><div class="role-title">Speaker</div><div class="role-name">Priya Sharma – "Serverless for Students"</div></div>
+          <div class="role-item"><div class="role-title">Volunteer Lead</div><div class="role-name">Rahul Joshi</div></div>
+          <div class="role-item"><div class="role-title">Technical Host</div><div class="role-name">Simran Nair</div></div>
+        </div>
+      </div>
+      <div class="event-footer">
+        <button class="btn-primary">Register Now →</button>
+        <button class="btn-outline">Add to Calendar</button>
+      </div>
+    </div>
+
+    <!-- Event 2 - Upcoming Hackathon -->
+    <div class="glass-card event-item">
+      <div class="event-header">
+        <div class="event-title">
+          <h3>AWS Hackathon: Build for Impact</h3>
+          <span class="badge">🔥 Featured</span>
+        </div>
+        <div class="event-date">📅 24 July 2025 | 9:00 AM – 9:00 PM</div>
+      </div>
+      <div class="event-body">
+        <div class="event-description">
+          <p>24-hour hackathon focused on sustainable tech solutions using AWS services. Mentorship from AWS certified professionals, prizes worth ₹50,000 + AWS credits.</p>
+          <p>📍 Hybrid – TCOER Campus + Online</p>
+        </div>
+        <div class="event-roles">
+          <h4>🎭 Event Roles</h4>
+          <div class="role-item"><div class="role-title">Hackathon Lead</div><div class="role-name">Rahul Joshi (Tech Lead)</div></div>
+          <div class="role-item"><div class="role-title">Mentor Coordinator</div><div class="role-name">Prof. Mehta</div></div>
+          <div class="role-item"><div class="role-title">Judging Panel</div><div class="role-name">AWS Solution Architects (invited)</div></div>
+          <div class="role-item"><div class="role-title">Volunteer Captain</div><div class="role-name">Neha Patil</div></div>
+        </div>
+      </div>
+      <div class="event-footer">
+        <button class="btn-primary">Register →</button>
+        <button class="btn-outline">View Rules</button>
+      </div>
+    </div>
+
+    <!-- Event 3 - AI/ML Workshop -->
+    <div class="glass-card event-item">
+      <div class="event-header">
+        <div class="event-title">
+          <h3>Build with Amazon Bedrock & SageMaker</h3>
+          <span class="badge">🤖 AI/ML Workshop</span>
+        </div>
+        <div class="event-date">📅 10 March 2025 | 2:00 PM – 6:00 PM</div>
+      </div>
+      <div class="event-body">
+        <div class="event-description">
+          <p>Hands-on workshop on building generative AI applications using Amazon Bedrock and SageMaker JumpStart. No prior ML experience required.</p>
+          <p>📍 Online (Zoom) + Lab access provided</p>
+        </div>
+        <div class="event-roles">
+          <h4>🎭 Event Roles</h4>
+          <div class="role-item"><div class="role-title">Workshop Instructor</div><div class="role-name">Aditya Kulkarni (AWS Certified AI Specialist)</div></div>
+          <div class="role-item"><div class="role-title">Teaching Assistant</div><div class="role-name">Rahul Joshi, Simran Nair</div></div>
+          <div class="role-item"><div class="role-title">Host</div><div class="role-name">Priya Sharma</div></div>
+        </div>
+      </div>
+      <div class="event-footer">
+        <button class="btn-primary">Enroll →</button>
+        <button class="btn-outline">Watch Recording</button>
+      </div>
+    </div>
+
+    <!-- Event 4 - Past Event (with roles) -->
+    <div class="glass-card event-item">
+      <div class="event-header">
+        <div class="event-title">
+          <h3>AWS Cloud Practitioner Bootcamp</h3>
+          <span class="badge">✅ Completed (Dec 2024)</span>
+        </div>
+        <div class="event-date">📅 14–15 December 2024</div>
+      </div>
+      <div class="event-body">
+        <div class="event-description">
+          <p>Two-day intensive bootcamp covering all domains for AWS Certified Cloud Practitioner. 45+ students attended, 12 passed the exam within a week.</p>
+          <p>📍 TCOER Seminar Hall</p>
+        </div>
+        <div class="event-roles">
+          <h4>🎭 Event Roles</h4>
+          <div class="role-item"><div class="role-title">Lead Trainer</div><div class="role-name">Aditya Kulkarni</div></div>
+          <div class="role-item"><div class="role-title">Co-trainer</div><div class="role-name">Rahul Joshi</div></div>
+          <div class="role-item"><div class="role-title">Exam Voucher Coordinator</div><div class="role-name">Priya Sharma</div></div>
+        </div>
+      </div>
+      <div class="event-footer">
+        <button class="btn-outline">View Resources</button>
+        <button class="btn-outline">Photo Gallery</button>
+      </div>
+    </div>
+
+    <!-- Event 5 - Past Workshop -->
+    <div class="glass-card event-item">
+      <div class="event-header">
+        <div class="event-title">
+          <h3>Intro to AWS Lambda & API Gateway</h3>
+          <span class="badge">✅ Completed (Nov 2024)</span>
+        </div>
+        <div class="event-date">📅 18 November 2024</div>
+      </div>
+      <div class="event-body">
+        <div class="event-description">
+          <p>Workshop on building serverless REST APIs using AWS Lambda, API Gateway, and DynamoDB. Participants deployed their first serverless app.</p>
+          <p>📍 Online</p>
+        </div>
+        <div class="event-roles">
+          <h4>🎭 Event Roles</h4>
+          <div class="role-item"><div class="role-title">Instructor</div><div class="role-name">Rahul Joshi</div></div>
+          <div class="role-item"><div class="role-title">Support Mentor</div><div class="role-name">Simran Nair</div></div>
+          <div class="role-item"><div class="role-title">Organizer</div><div class="role-name">Aditya Kulkarni</div></div>
+        </div>
+      </div>
+      <div class="event-footer">
+        <button class="btn-outline">Watch Recording</button>
+        <button class="btn-outline">GitHub Repo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="logo" style="justify-content:center; margin-bottom:1rem;">
+      <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="18" r="16" stroke="#ff9900" stroke-width="2"/>
+        <path d="M10 22c2-6 4-10 8-10s6 4 8 10" stroke="#ffb347" stroke-width="2"/>
+        <circle cx="18" cy="14" r="3" fill="#ff9900"/>
+      </svg>
+      AWS Cloud Club TCOER
+    </div>
+    <div class="social-links">
+      <a href="#">𝕏</a>
+      <a href="#">in</a>
+      <a href="#">🐙</a>
+      <a href="#">📷</a>
+    </div>
+    <p style="color:var(--text-muted); font-size:0.8rem;">© 2025 AWS CLUB TCOER — All events are open to all students.</p>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+    const backBtn = document.getElementById('backToTop');
+    if (window.scrollY > 300) backBtn.classList.add('visible');
+    else backBtn.classList.remove('visible');
+  });
+
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const closeMenu = document.getElementById('closeMenu');
+  function openMenu() { mobileMenu.classList.add('active'); }
+  function closeMenuFn() { mobileMenu.classList.remove('active'); }
+  menuToggle.addEventListener('click', openMenu);
+  closeMenu.addEventListener('click', closeMenuFn);
+  document.querySelectorAll('.mobile-menu a').forEach(link => link.addEventListener('click', closeMenuFn));
+
+  const cursorGlow = document.getElementById('cursorGlow');
+  document.addEventListener('mousemove', (e) => {
+    cursorGlow.style.opacity = '1';
+    cursorGlow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+  });
+  document.addEventListener('mouseleave', () => cursorGlow.style.opacity = '0');
+</script>
+</body>
+</html>
